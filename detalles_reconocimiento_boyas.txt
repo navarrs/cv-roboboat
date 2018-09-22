@@ -1,0 +1,52 @@
+Enter Image Path: ../datasets/boyas/boyas1.jpg
+../datasets/boyas/boyas1.jpg: Predicted in 0.261605 seconds.
+b: 79%
+b: 77%
+b: 60%
+Enter Image Path: ../datasets/boyas/boyas2.jpg
+../datasets/boyas/boyas2.jpg: Predicted in 0.261525 seconds.
+b: 79%
+Enter Image Path: ../datasets/boyas/boyas3.jpg
+../datasets/boyas/boyas3.jpg: Predicted in 0.250596 seconds.
+b: 90%
+b: 68%
+Enter Image Path: ../datasets/boyas/boyas4.jpg
+../datasets/boyas/boyas4.jpg: Predicted in 0.262841 seconds.
+b: 75%
+Enter Image Path: ../datasets/boyas/boyas5.jpg
+../datasets/boyas/boyas5.jpg: Predicted in 0.263942 seconds.
+b: 83%
+Enter Image Path: ../datasets/boyas/boyas6.jpg
+../datasets/boyas/boyas6.jpg: Predicted in 0.264078 seconds.
+p: 64%
+p: 56%
+p: 52%
+b: 91%
+Enter Image Path: ../datasets/boyas/boyas7.jpg
+../datasets/boyas/boyas7.jpg: Predicted in 0.264030 seconds.
+b: 64%
+Enter Image Path: ../datasets/boyas/boyas8.jpg
+../datasets/boyas/boyas8.jpg: Predicted in 0.254366 seconds.
+p: 52%
+b: 51%
+Enter Image Path: ../datasets/boyas/boyas9.jpg
+../datasets/boyas/boyas9.jpg: Predicted in 0.262927 seconds.
+b: 72%
+Enter Image Path: ../datasets/boyas/boyas10.jpg
+../datasets/boyas/boyas10.jpg: Predicted in 0.263564 seconds.
+b: 77%
+b: 56%
+Enter Image Path: ../datasets/boyas/boyas11.jpg
+../datasets/boyas/boyas11.jpg: Predicted in 0.253699 seconds.
+b: 84%
+Enter Image Path: ../datasets/boyas/boyas12.jpg
+../datasets/boyas/boyas12.jpg: Predicted in 0.261780 seconds.
+p: 59%
+p: 58%
+p: 53%
+b: 78%
+b: 58%
+Enter Image Path: ../datasets/boyas/boyas15.jpg
+../datasets/boyas/boyas15.jpg: Predicted in 0.261772 seconds.
+b: 56%
+b: 51%
