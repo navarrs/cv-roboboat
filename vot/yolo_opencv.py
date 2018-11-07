@@ -1,10 +1,4 @@
-#############################################
-# Object detection - YOLO - OpenCV
-# Author : Arun Ponnusamy   (July 16, 2018)
-# Website : http://www.arunponnusamy.com
-############################################
-
-from pyimagesearch.centroidtracker import CentroidTracker
+from tracker.centroidtracker import Tracker
 import cv2
 import argparse
 import numpy as np
@@ -30,7 +24,7 @@ ap.add_argument('-cl', '--classes', required=True, help = 'path to text file con
 args = ap.parse_args()
 
 # Initialize centroid tracker
-ct = CentroidTracker()
+tracker = Tracker()
 (H, W) = (None, None)
 
 # Load model 
@@ -87,15 +81,15 @@ while stream.isOpened():
                 confidences.append(float(confidence))
                 boxes.append([x, y, w, h])
 
-    objects = ct.update(boxes)
-
+    indices = cv2.dnn.NMSBoxes(boxes, confidences, conf_threshold, nms_threshold)
+    objects = tracker.update(boxes)
     for (objectID, centroid) in objects.items():
     	text = "ID {}".format(objectID)
-    	cv2.putText(image, text, (centroid[0] - 10, centroid[1] - 10), 
-    		cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+
+    	cv2.putText(image, text, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
     	cv2.circle(image, (centroid[0], centroid[1]), 4, (0, 255, 0), -1)
 
-    indices = cv2.dnn.NMSBoxes(boxes, confidences, conf_threshold, nms_threshold)
+    
     for i in indices:
         i = i[0]
         box = boxes[i]
@@ -108,4 +102,3 @@ while stream.isOpened():
         break
 
 cv2.destroyAllWindows()
-stream.stop()
