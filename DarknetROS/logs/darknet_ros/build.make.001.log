@@ -1,0 +1,208 @@
+/usr/bin/cmake -H/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros -B/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/make -f CMakeFiles/Makefile2 run_tests
+make[1]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/cmake -H/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros -B/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles 5
+/usr/bin/make -f CMakeFiles/Makefile2 CMakeFiles/run_tests.dir/all
+make[2]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/make -f gtest/gtest/CMakeFiles/gtest.dir/build.make gtest/gtest/CMakeFiles/gtest.dir/depend
+/usr/bin/make -f CMakeFiles/clean_test_results_darknet_ros.dir/build.make CMakeFiles/clean_test_results_darknet_ros.dir/depend
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+cd /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/clean_test_results_darknet_ros.dir/DependInfo.cmake --color=
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+cd /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /usr/src/gtest /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest/CMakeFiles/gtest.dir/DependInfo.cmake --color=
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest/CMakeFiles/gtest.dir/DependInfo.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest/CMakeFiles/gtest.dir/depend.internal".
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest/CMakeFiles/gtest.dir/depend.internal".
+[35m[1mScanning dependencies of target gtest[0m
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/clean_test_results_darknet_ros.dir/DependInfo.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/clean_test_results_darknet_ros.dir/depend.internal".
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/clean_test_results_darknet_ros.dir/depend.internal".
+[35m[1mScanning dependencies of target clean_test_results_darknet_ros[0m
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/make -f CMakeFiles/clean_test_results_darknet_ros.dir/build.make CMakeFiles/clean_test_results_darknet_ros.dir/build
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/python /opt/ros/kinetic/share/catkin/cmake/test/remove_test_results.py /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/test_results/darknet_ros
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/make -f gtest/gtest/CMakeFiles/gtest.dir/build.make gtest/gtest/CMakeFiles/gtest.dir/build
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+[ 20%] [32mBuilding CXX object gtest/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o[0m
+cd /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest && /usr/bin/c++   -DDARKNET_FILE_PATH=\"/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet\" -DGPU -DGTEST_CREATE_SHARED_LIBRARY=1 -DOPENCV -Dgtest_EXPORTS -I/opt/ros/kinetic/include/opencv-3.3.1-dev -I/opt/ros/kinetic/include/opencv-3.3.1-dev/opencv -I/usr/src/gtest/include -I/usr/src/gtest  -std=c++11  -O3 -DNDEBUG -fPIC   -O4 -g -std=c++11  -Wall -Wshadow -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/gtest/src/gtest-all.cc
+Removing test result files from '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/test_results/darknet_ros'
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+[ 20%] Built target clean_test_results_darknet_ros
+[ 40%] [32m[1mLinking CXX shared library libgtest.so[0m
+cd /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest && /usr/bin/cmake -E cmake_link_script CMakeFiles/gtest.dir/link.txt --verbose=1
+/usr/bin/c++  -fPIC -std=c++11  -O3 -DNDEBUG  -shared -Wl,-soname,libgtest.so -o libgtest.so CMakeFiles/gtest.dir/src/gtest-all.cc.o  -L/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest/src -lSM -lICE -lX11 -lXext -lpthread -Wl,-rpath,/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest/src 
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+[ 40%] Built target gtest
+/usr/bin/make -f CMakeFiles/darknet_ros_object_detection-test.dir/build.make CMakeFiles/darknet_ros_object_detection-test.dir/depend
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+cd /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/darknet_ros_object_detection-test.dir/DependInfo.cmake --color=
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/darknet_ros_object_detection-test.dir/DependInfo.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/darknet_ros_object_detection-test.dir/depend.internal".
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/darknet_ros_object_detection-test.dir/depend.internal".
+[35m[1mScanning dependencies of target darknet_ros_object_detection-test[0m
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/make -f CMakeFiles/darknet_ros_object_detection-test.dir/build.make CMakeFiles/darknet_ros_object_detection-test.dir/build
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+[ 60%] [32mBuilding CXX object CMakeFiles/darknet_ros_object_detection-test.dir/test/test_main.cpp.o[0m
+/usr/bin/c++   -DDARKNET_FILE_PATH=\"/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet\" -DGPU -DOPENCV -DROSCONSOLE_BACKEND_LOG4CXX -DROS_PACKAGE_NAME=\"darknet_ros\" -I/opt/ros/kinetic/include/opencv-3.3.1-dev -I/opt/ros/kinetic/include/opencv-3.3.1-dev/opencv -I/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet/src -I/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet/include -I/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros/include -I/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/.private/darknet_ros_msgs/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/local/cuda-8.0/include  -std=c++11  -O3 -DNDEBUG   -O4 -g -o CMakeFiles/darknet_ros_object_detection-test.dir/test/test_main.cpp.o -c /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros/test/test_main.cpp
+[ 80%] [32mBuilding CXX object CMakeFiles/darknet_ros_object_detection-test.dir/test/ObjectDetection.cpp.o[0m
+/usr/bin/c++   -DDARKNET_FILE_PATH=\"/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet\" -DGPU -DOPENCV -DROSCONSOLE_BACKEND_LOG4CXX -DROS_PACKAGE_NAME=\"darknet_ros\" -I/opt/ros/kinetic/include/opencv-3.3.1-dev -I/opt/ros/kinetic/include/opencv-3.3.1-dev/opencv -I/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet/src -I/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet/include -I/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros/include -I/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/.private/darknet_ros_msgs/include -I/opt/ros/kinetic/include -I/opt/ros/kinetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/local/cuda-8.0/include  -std=c++11  -O3 -DNDEBUG   -O4 -g -o CMakeFiles/darknet_ros_object_detection-test.dir/test/ObjectDetection.cpp.o -c /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros/test/ObjectDetection.cpp
+[100%] [32m[1mLinking CXX executable /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/.private/darknet_ros/lib/darknet_ros/darknet_ros_object_detection-test[0m
+/usr/bin/cmake -E cmake_link_script CMakeFiles/darknet_ros_object_detection-test.dir/link.txt --verbose=1
+/usr/bin/c++   -std=c++11  -O3 -DNDEBUG   CMakeFiles/darknet_ros_object_detection-test.dir/test/test_main.cpp.o CMakeFiles/darknet_ros_object_detection-test.dir/test/ObjectDetection.cpp.o  -o /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/.private/darknet_ros/lib/darknet_ros/darknet_ros_object_detection-test  -L/usr/local/cuda/lib64 -rdynamic -lSM -lICE -lX11 -lXext gtest/gtest/libgtest.so /opt/ros/kinetic/lib/libcv_bridge.so /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_core3.so.3.3.1 /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_imgproc3.so.3.3.1 /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_imgcodecs3.so.3.3.1 /opt/ros/kinetic/lib/libactionlib.so /opt/ros/kinetic/lib/libimage_transport.so /opt/ros/kinetic/lib/libmessage_filters.so -ltinyxml2 /opt/ros/kinetic/lib/libclass_loader.so -lPocoFoundation -ldl /opt/ros/kinetic/lib/libroscpp.so -lboost_signals /opt/ros/kinetic/lib/librosconsole.so /opt/ros/kinetic/lib/librosconsole_log4cxx.so /opt/ros/kinetic/lib/librosconsole_backend_interface.so -llog4cxx -lboost_regex /opt/ros/kinetic/lib/libxmlrpcpp.so /opt/ros/kinetic/lib/libroslib.so /opt/ros/kinetic/lib/librospack.so -lpython2.7 -lboost_filesystem -lboost_program_options -ltinyxml /opt/ros/kinetic/lib/libroscpp_serialization.so /opt/ros/kinetic/lib/librostime.so /opt/ros/kinetic/lib/libcpp_common.so -lboost_system -lboost_thread -lboost_chrono -lboost_date_time -lboost_atomic -lpthread -lconsole_bridge -lSM -lICE -lX11 -lXext -lpthread -Wl,-rpath,/usr/local/cuda/lib64:/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/gtest/gtest:/opt/ros/kinetic/lib 
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+[100%] Built target darknet_ros_object_detection-test
+/usr/bin/make -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/depend
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+cd /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/tests.dir/DependInfo.cmake --color=
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/tests.dir/DependInfo.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/tests.dir/depend.internal".
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/tests.dir/depend.internal".
+[35m[1mScanning dependencies of target tests[0m
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/make -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+make[3]: Nothing to be done for 'CMakeFiles/tests.dir/build'.
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+[100%] Built target tests
+/usr/bin/make -f CMakeFiles/_run_tests_darknet_ros_rostest_test_object_detection.test.dir/build.make CMakeFiles/_run_tests_darknet_ros_rostest_test_object_detection.test.dir/depend
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+cd /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros_rostest_test_object_detection.test.dir/DependInfo.cmake --color=
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros_rostest_test_object_detection.test.dir/DependInfo.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros_rostest_test_object_detection.test.dir/depend.internal".
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros_rostest_test_object_detection.test.dir/depend.internal".
+[35m[1mScanning dependencies of target _run_tests_darknet_ros_rostest_test_object_detection.test[0m
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/make -f CMakeFiles/_run_tests_darknet_ros_rostest_test_object_detection.test.dir/build.make CMakeFiles/_run_tests_darknet_ros_rostest_test_object_detection.test.dir/build
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/catkin/cmake/test/run_tests.py /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/test_results/darknet_ros/rostest-test_object_detection.xml "/opt/ros/kinetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros --package=darknet_ros --results-filename test_object_detection.xml --results-base-dir \"/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/test_results\" /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros/test/object_detection.test "
+-- run_tests.py: execute commands
+  /opt/ros/kinetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros --package=darknet_ros --results-filename test_object_detection.xml --results-base-dir "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/test_results" /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros/test/object_detection.test 
+... logging to /home/inavarro/.ros/log/rostest-Navars-Machine-29912.log
+[ROSUNIT] Outputting test results to /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/test_results/darknet_ros/rostest-test_object_detection.xml
+[0m[ INFO] [1541715736.327816406]: [YoloObjectDetector] Node started.[0m
+[0m[ INFO] [1541715736.330510123]: [YoloObjectDetector] Xserver is running.[0m
+[0m[ INFO] [1541715736.331442113]: [YoloObjectDetector] init().[0m
+YOLO V3
+layer     filters    size              input                output
+    0 conv     32  3 x 3 / 1   416 x 416 x   3   ->   416 x 416 x  32  0.299 BFLOPs
+    1 max          2 x 2 / 2   416 x 416 x  32   ->   208 x 208 x  32
+    2 conv     64  3 x 3 / 1   208 x 208 x  32   ->   208 x 208 x  64  1.595 BFLOPs
+    3 max          2 x 2 / 2   208 x 208 x  64   ->   104 x 104 x  64
+    4 conv    128  3 x 3 / 1   104 x 104 x  64   ->   104 x 104 x 128  1.595 BFLOPs
+    5 conv     64  1 x 1 / 1   104 x 104 x 128   ->   104 x 104 x  64  0.177 BFLOPs
+    6 conv    128  3 x 3 / 1   104 x 104 x  64   ->   104 x 104 x 128  1.595 BFLOPs
+    7 max          2 x 2 / 2   104 x 104 x 128   ->    52 x  52 x 128
+    8 conv    256  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 256  1.595 BFLOPs
+    9 conv    128  1 x 1 / 1    52 x  52 x 256   ->    52 x  52 x 128  0.177 BFLOPs
+   10 conv    256  3 x 3 / 1    52 x  52 x 128   ->    52 x  52 x 256  1.595 BFLOPs
+   11 max          2 x 2 / 2    52 x  52 x 256   ->    26 x  26 x 256
+   12 conv    512  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 512  1.595 BFLOPs
+   13 conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+   14 conv    512  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 512  1.595 BFLOPs
+   15 conv    256  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x 256  0.177 BFLOPs
+   16 conv    512  3 x 3 / 1    26 x  26 x 256   ->    26 x  26 x 512  1.595 BFLOPs
+   17 max          2 x 2 / 2    26 x  26 x 512   ->    13 x  13 x 512
+   18 conv   1024  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x1024  1.595 BFLOPs
+   19 conv    512  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 512  0.177 BFLOPs
+   20 conv   1024  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x1024  1.595 BFLOPs
+   21 conv    512  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 512  0.177 BFLOPs
+   22 conv   1024  3 x 3 / 1    13 x  13 x 512   ->    13 x  13 x1024  1.595 BFLOPs
+   23 conv   1024  3 x 3 / 1    13 x  13 x1024   ->    13 x  13 x1024  3.190 BFLOPs
+   24 conv   1024  3 x 3 / 1    13 x  13 x1024   ->    13 x  13 x1024  3.190 BFLOPs
+   25 route  16
+   26 conv     64  1 x 1 / 1    26 x  26 x 512   ->    26 x  26 x  64  0.044 BFLOPs
+   27 reorg              / 2    26 x  26 x  64   ->    13 x  13 x 256
+   28 route  27 24
+   29 conv   1024  3 x 3 / 1    13 x  13 x1280   ->    13 x  13 x1024  3.987 BFLOPs
+   30 conv    425  1 x 1 / 1    13 x  13 x1024   ->    13 x  13 x 425  0.147 BFLOPs
+   31 detection
+mask_scale: Using default '1.000000'
+Loading weights from /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros/yolo_network_config/weights/yolov2.weights...Done!
+Waiting for image.
+[2J[1;1H
+FPS:14122.2
+Objects:
+
+person: 80%
+person: 62%
+[2J[1;1H
+FPS:1.4
+Objects:
+
+person: 81%
+person: 67%
+person: 55%
+[2J[1;1H
+FPS:1.5
+Objects:
+
+person: 81%
+person: 67%
+person: 55%
+QObject::~QObject: Timers cannot be stopped from another thread
+[Testcase: testdarknet_ros_object_detection] ... ok
+
+[ROSTEST]-----------------------------------------------------------------------
+
+[darknet_ros.rosunit-darknet_ros_object_detection/DISABLED_DetectDog][passed]
+[darknet_ros.rosunit-darknet_ros_object_detection/DetectANYmal][FAILURE]--------
+/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros/test/ObjectDetection.cpp:192
+Expected: (centerErrorPersonX) < (30), actual: 259.5 vs 30
+--------------------------------------------------------------------------------
+
+
+[darknet_ros.rosunit-darknet_ros_object_detection/DetectANYmal][FAILURE]--------
+/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros/test/ObjectDetection.cpp:193
+Expected: (centerErrorPersonY) < (30), actual: 284.5 vs 30
+--------------------------------------------------------------------------------
+
+[darknet_ros.rosunit-darknet_ros_object_detection/DISABLED_DetectPerson][passed]
+
+SUMMARY
+[1;31m * RESULT: FAIL[0m
+ * TESTS: 3
+ * ERRORS: 0
+[1;31m * FAILURES: 1[0m
+
+rostest log file is in /home/inavarro/.ros/log/rostest-Navars-Machine-29912.log
+-- run_tests.py: verify result "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/test_results/darknet_ros/rostest-test_object_detection.xml"
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+[100%] Built target _run_tests_darknet_ros_rostest_test_object_detection.test
+/usr/bin/make -f CMakeFiles/_run_tests_darknet_ros_rostest.dir/build.make CMakeFiles/_run_tests_darknet_ros_rostest.dir/depend
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+cd /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros_rostest.dir/DependInfo.cmake --color=
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros_rostest.dir/DependInfo.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros_rostest.dir/depend.internal".
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros_rostest.dir/depend.internal".
+[35m[1mScanning dependencies of target _run_tests_darknet_ros_rostest[0m
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/make -f CMakeFiles/_run_tests_darknet_ros_rostest.dir/build.make CMakeFiles/_run_tests_darknet_ros_rostest.dir/build
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+make[3]: Nothing to be done for 'CMakeFiles/_run_tests_darknet_ros_rostest.dir/build'.
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+[100%] Built target _run_tests_darknet_ros_rostest
+/usr/bin/make -f CMakeFiles/_run_tests_darknet_ros.dir/build.make CMakeFiles/_run_tests_darknet_ros.dir/depend
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+cd /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros.dir/DependInfo.cmake --color=
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros.dir/DependInfo.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros.dir/depend.internal".
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/_run_tests_darknet_ros.dir/depend.internal".
+[35m[1mScanning dependencies of target _run_tests_darknet_ros[0m
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/make -f CMakeFiles/_run_tests_darknet_ros.dir/build.make CMakeFiles/_run_tests_darknet_ros.dir/build
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+make[3]: Nothing to be done for 'CMakeFiles/_run_tests_darknet_ros.dir/build'.
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+[100%] Built target _run_tests_darknet_ros
+/usr/bin/make -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+cd /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/src/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/run_tests.dir/DependInfo.cmake --color=
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/run_tests.dir/DependInfo.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/run_tests.dir/depend.internal".
+Dependee "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles/run_tests.dir/depend.internal".
+[35m[1mScanning dependencies of target run_tests[0m
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/make -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
+make[3]: Entering directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+make[3]: Nothing to be done for 'CMakeFiles/run_tests.dir/build'.
+make[3]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+[100%] Built target run_tests
+make[2]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
+/usr/bin/cmake -E cmake_progress_start /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros/CMakeFiles 0
+make[1]: Leaving directory '/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/build/darknet_ros'
