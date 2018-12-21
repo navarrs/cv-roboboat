@@ -39,6 +39,10 @@ else: # Open specified video file
 # Loop over frames
 while video.isOpened():
 	ret, frame = video.read()
+	
+	if detector.get_w() is None or detector.get_h() is None:
+		detector.set_h( frame.shape[0] )
+		detector.set_w( frame.shape[1] )
 
 	if not ret:
 		print ( "[INFO] done processing..." )
@@ -48,15 +52,16 @@ while video.isOpened():
 		print ( "[INFO] quitting program...")
 		break
 
-	# Compute image blob
-	scale = 0.00392 # ?
-	blob = detector.get_blob( scale )
-	net.setInput(blob)
+	# Get detections 
+	boxes, confidences, indices, cls_ids = detector.get_detections( net, frame )
 
-	if W is None or H is None:
-    	H = frame.shape[0]
-    	W = frame.shape[1]
-
+	# Draw predictions
+	for i in indices:
+		i = i[0]
+		box = boxes[i]
+		x, y, w, h = box
+		detector.draw_prediction(frame, cls_ids[i], confidences[i], round(x), round(y), round(x+w), round(y+h))
+	
 	cv2.imshow ( "Frame", frame )
 
 cv2.destroyAllWindows ()
