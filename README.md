@@ -21,18 +21,11 @@ References
   year={2018}
 }
 ```
-## TODO: Prerequisites
+## Comando detector 
+
+```
+python3 main.py --config vantec/config/yolo3-vantec.cfg --weights vantec/weights/yolo3-vantec.weights --classes vantec/obj.names --video video.mp4 
 
 ```
 
-```
 
-## TODO: how to use
-
-
-
-## TODO: Some results
-
-<p align="center">
-    <img src="./readme/img.png" width="600" />
-</p>
