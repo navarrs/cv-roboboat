@@ -1,7 +1,0 @@
-darknet_ros/darknet_ros
-/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/.private/darknet_ros/share/darknet_ros/cmake/darknet_rosConfig-version.cmake /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/share/darknet_ros/cmake/darknet_rosConfig-version.cmake
-/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/.private/darknet_ros/share/darknet_ros/cmake/darknet_rosConfig.cmake /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/share/darknet_ros/cmake/darknet_rosConfig.cmake
-/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/.private/darknet_ros/lib/libdarknet_ros_lib.so /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/lib/libdarknet_ros_lib.so
-/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/.private/darknet_ros/lib/pkgconfig/darknet_ros.pc /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/lib/pkgconfig/darknet_ros.pc
-/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/.private/darknet_ros/lib/darknet_ros/darknet_ros_object_detection-test /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/lib/darknet_ros/darknet_ros_object_detection-test
-/home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/.private/darknet_ros/lib/darknet_ros/darknet_ros /home/inavarro/Desktop/workspace/VantTEC-CV/DarknetROS/devel/lib/darknet_ros/darknet_ros
