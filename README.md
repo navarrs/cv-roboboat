@@ -21,11 +21,18 @@ References
   year={2018}
 }
 ```
-## Comando detector 
+
+## Detector + Tracker
+
+NOTA: Por el momento solo se tiene el CentroidTracker. 
+
+Dentro de la carpeta boat-vision, ejecutar: 
+```
+
+python3 main.py --config vanttec/config/yolo3-vantec.cfg --weights vanttec/weights/yolo3-vantec.weights --classes vanttec/obj.names --video vanttec/video.mp4
 
 ```
-python3 main.py --config vantec/config/yolo3-vantec.cfg --weights vantec/weights/yolo3-vantec.weights --classes vantec/obj.names --video video.mp4 
-
-```
+Ejemplo de resultado:
+<p align="center"><img src="./readme/det-track.png" /> </p>
 
 
