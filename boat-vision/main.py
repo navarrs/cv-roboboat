@@ -7,6 +7,7 @@
 """
 
 from detection.detector import Detector
+from tracker.centroidtracker import CentroidTracker
 import argparse
 import cv2
 
@@ -20,8 +21,9 @@ ap.add_argument( '-v', '--video', required=True, help = 'path to the video' )
 args = ap.parse_args()
 
 
-# Initialize detector
+# Initialize detector and tracker
 detector = Detector( args.config, args.weights, args.classes )
+tracker = CentroidTracker()
 
 (H, W) = (None, None)
 
@@ -37,7 +39,9 @@ else: # Open specified video file
 	video = cv2.VideoCapture( args.video )
 
 # Loop over frames
+count = 0
 while video.isOpened():
+	
 	ret, frame = video.read()
 	
 	if detector.get_w() is None or detector.get_h() is None:
@@ -52,17 +56,31 @@ while video.isOpened():
 		print ( "[INFO] quitting program...")
 		break
 
-	# Get detections 
-	boxes, confidences, indices, cls_ids = detector.get_detections( net, frame )
+	boxes = []
+	confidences = []
+	indices = []
+	if count % 10 == 0:
+		# Get dections 
+		boxes, confidences, indices, cls_ids = detector.get_detections( net, frame )
+		
+		# Draw predictions
+		for i in indices:
+			i = i[0]
+			box = boxes[i]
+			x, y, w, h = box
+			detector.draw_prediction( frame, cls_ids[i], confidences[i], round(x), round(y), round(x+w), round(y+h) )
+		
+		# Track objects 
+		objects = tracker.update( boxes )
+		for ( obj_id, centroid ) in objects.items():
+			text = "ID: {}".format(obj_id)
+			cv2.putText(frame, text, (centroid[0] - 10, centroid[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+		
+		cv2.imshow ( "Frame", frame )
 
-	# Draw predictions
-	for i in indices:
-		i = i[0]
-		box = boxes[i]
-		x, y, w, h = box
-		detector.draw_prediction(frame, cls_ids[i], confidences[i], round(x), round(y), round(x+w), round(y+h))
-	
-	cv2.imshow ( "Frame", frame )
+	elif count == 101:
+		count = 0
+	count += 1
 
 cv2.destroyAllWindows ()
 

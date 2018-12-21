@@ -13,14 +13,17 @@ from imutils.video import FPS, VideoStream
 import time
 
 def get_output_layers(net):
-    layer_names = net.getLayerNames()
-    output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
-    return output_layers
+	"""
+		Gets layers that make detections.
+	"""
+	layer_names = net.getLayerNames()
+	output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+	return output_layers
 
 class Detector():
 	def __init__( self, cfg, weights, class_file, conf_thresh=0.5, nms_thresh=0.4 ):
 		"""
-			Constructor
+			Constructor.
 		"""
 		self.config  = cfg
 		self.weights = weights
@@ -33,24 +36,46 @@ class Detector():
 		self.COLORS = np.random.uniform(0, 255, size=(len(self.classes), 3))
 
 	def get_w( self ):
+		"""
+			Gets current frame width.
+		"""
 		return self.W
 
 	def set_w( self, w ):
+		"""
+			Sets frame width.
+		"""
 		self.W = w
 
 	def get_h( self ):
+		"""
+			Gets current frame height.
+		"""
 		return self.H
 
 	def set_h( self, h ):
+		"""
+			Sets frame height.
+		"""
 		self.H = h
 
 	def load_model( self ):
+		"""
+			Loads DNN model using the configuration and weights file. 
+		"""
 		return cv2.dnn.readNet(self.config, self.weights)
 
 	def get_blob( self, scale, image ):
+		"""
+			Gets image blob.
+		"""
 		return cv2.dnn.blobFromImage(image, scale, (416,416), (0,0,0), True, crop=False)
 
 	def get_detections( self, net, image ):
+		"""
+			Computes detections and returns a list of bounding boxes, 
+			confidences, indices and class ids. 
+		"""
 		# Get image blob
 		scale = 0.00392 # ?
 		blob = self.get_blob( scale, image )
@@ -60,6 +85,7 @@ class Detector():
 		class_ids = []
 		confidences = []
 		boxes = []
+		det = []
 		outs = net.forward( get_output_layers(net) )
 		for out in outs:
 			for detection in out:
@@ -82,6 +108,9 @@ class Detector():
 		return boxes, confidences, indices, class_ids
 
 	def draw_prediction( self, img, class_id, confidence, x, y, x_plus_w, y_plus_h ):
+		"""
+			Draws bounding boxes to image.
+		"""
 		label = str( self.classes[class_id] )
 		color = self.COLORS[class_id] 
 		cv2.rectangle(img, (x,y), (x_plus_w,y_plus_h), color, 2)
