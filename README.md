@@ -35,6 +35,7 @@ Ejemplo de resultado:
 ## TO DO:
 - [x] Deteccion de objetos
 - [ ] Buscar un metodo mas preciso para realizar rastreo de objetos (Tracking) 
+- [ ] Optimizacion de sistema de deteccion - rastreo
 - [ ] Reconocimiento de colores
 - [ ] Estimacion de distancias con respecto a las camaras (Stereo)
 - [ ] Planeacion de trayectorias
