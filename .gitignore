@@ -7,3 +7,4 @@ DarknetROS/src/darknet_ros/darknet_ros/yolo_network_config
 env
 .vscode
 requirements.txt
+boat-vision/colors/color-detection-dataset
