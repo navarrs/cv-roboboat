@@ -78,7 +78,7 @@ class Detector():
 		"""
 		# Get image blob
 		scale = 0.00392 # ?
-		blob = self.get_blob( scale, image )
+		blob = self.get_blob( image, scale )
 		net.setInput(blob)
 
 		# Detections
