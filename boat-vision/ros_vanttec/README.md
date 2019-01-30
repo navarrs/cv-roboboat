@@ -10,7 +10,7 @@
 - Ubuntu 16.04 
 
 ## Referencias
-``
+```
 @article{redmon2016yolo9000,
   title={YOLO9000: Better, Faster, Stronger},
   author={Redmon, Joseph and Farhadi, Ali},
