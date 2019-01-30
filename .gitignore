@@ -13,11 +13,11 @@ tesseract
 vot
 boat-vision/vanttec
 
-ros_vanttec/build/*
-ros_vanttec/devel/*
-ros_vanttec/vanttec/*
-ros_vanttec/src/boat/*.txt
-ros_vanttec/src/boat/*.xml
+boat-vision/ros_vanttec/build/*
+boat-vision/ros_vanttec/devel/*
+boat-vision/ros_vanttec/vanttec/*
+boat-vision/ros_vanttec/src/boat/*.txt
+boat-vision/ros_vanttec/src/boat/*.xml
 
 *.pyc
 *__init__.pyt
