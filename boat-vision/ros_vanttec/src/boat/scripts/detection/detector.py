@@ -35,31 +35,31 @@ class Detector():
 		self.H = None
 		self.COLORS = np.random.uniform(0, 255, size=(len(self.classes), 3))
 
-	def get_w( self ):
+	def get_w(self):
 		""" Gets current frame width. """
 		return self.W
 
-	def set_w( self, w ):
+	def set_w(self, w):
 		""" Sets frame width. """
 		self.W = w
 
-	def get_h( self ):
+	def get_h(self):
 		""" Gets current frame height. """
 		return self.H
 
-	def set_h( self, h ):
+	def set_h(self, h):
 		""" Sets frame height. """
 		self.H = h
 
-	def load_model( self ):
+	def load_model(self):
 		""" Loads DNN model using the configuration and weights file. """
 		return cv2.dnn.readNet(self.config, self.weights)
 
-	def get_blob( self, scale, image ):
+	def get_blob(self, scale, image):
 		""" Gets image blob. """
 		return cv2.dnn.blobFromImage(image, scale, (416,416), (0,0,0), True, crop=False)
 
-	def get_detections( self, net, image ):
+	def get_detections(self, net, image):
 		""" Computes detections and returns a list of bounding boxes, 
 			confidences, indices and class ids. """
 
@@ -94,12 +94,23 @@ class Detector():
 		
 		return boxes, confidences, indices, class_ids
 
-	def draw_prediction( self, img, class_id, confidence, x, y, x_plus_w, y_plus_h ):
+	def draw_prediction(self, img, class_id, confidence, x1, y1, x2, y2):
 		""" Draws bounding boxes to image. """
 		label = str( self.classes[class_id] )
 		color = self.COLORS[class_id] 
-		cv2.rectangle(img, (x,y), (x_plus_w,y_plus_h), color, 2)
-		cv2.putText(img, label, (x-10,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+		
+		# if x1 < 0:
+			
+		# 	x2 = self.get_w
+		# if not y2 <= self.get_h:
+		# 	y2 + self.get_h
+
+		# if not x2 <= self.get_w:
+		# 	x2 = self.get_w
+		# if not y2 <= self.get_h:
+		# 	y2 + self.get_h
+		cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
+		cv2.putText(img, label, (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
 
 

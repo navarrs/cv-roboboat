@@ -17,15 +17,24 @@
         Tested on ROS Kinetic. 
         Tested on Ubuntu 16.04 LTS
 """
+
+# TODO: assert sizes of bounding boxes (LINE 111)
+# TODO: FIX ERROR>> IndexError: list index out of range (LINE 112)
+# TODO: Find out why YOLOv3 detects so badly (LINE 103)
+
 from detection.detector import Detector 
 from std_msgs.msg import String
+from imutils.video import VideoStream
+from imutils.video import FPS
 
+import imutils
 import argparse
 import numpy as np 
 import time
 import rospy
 import cv2
 
+# Parse arguments
 ap = argparse.ArgumentParser()
 ap.add_argument('--config', required=True, help = 'Path to yolo config file')
 ap.add_argument('--weights', required=True, help = 'Path to yolo pre-trained weights')
@@ -33,21 +42,115 @@ ap.add_argument('--classes', required=True, help = 'Path to text file containing
 ap.add_argument('--video', required=True, help = 'Path to the video' )
 args = ap.parse_args()
 
-cv2.dnn.readNet(args.config, args.weights)
+class Color():
+    BLUE  = '\033[94m'
+    GREEN = '\033[92m'
+    FAIL  = '\033[91m'
+    DONE  = '\033[0m'
 
-def talker():
-    pub = rospy.Publisher('chatter', String, queue_size=10)
-    rospy.init_node('talker', anonymous=True)
-    rate = rospy.Rate(10) # 10hz
-    while not rospy.is_shutdown():
-        hello_str = "__hello world %s " % rospy.get_time()
-        hello_str += " %s " % cv2.__version__ 
-        rospy.loginfo(hello_str)
-        pub.publish(hello_str)
+def detect():
+    """ Performs object detection and publishes coordinates. """
+    
+    # Initialize detector 
+    msg = Color.GREEN + "[INFO] Initializing TinyYOLOv3 detector." + Color.DONE
+    rospy.loginfo(msg)
+    detector_pub.publish(msg)
+    det = Detector(args.config, args.weights, args.classes)
+    (H, W) = (None, None)
+
+    # Load model 
+    msg = Color.GREEN + "[INFO] Loading network model." + Color.DONE
+    rospy.loginfo(msg)
+    detector_pub.publish(msg)
+    net = det.load_model()
+
+    # Initilialize Video Stream
+    msg = Color.GREEN + "[INFO] Starting video stream." + Color.DONE
+    rospy.loginfo(msg)
+    detector_pub.publish(msg)
+    if args.video == "0":
+        video = cv2.VideoCapture(0)
+    else:
+        video = cv2.VideoCapture(args.video)
+
+    counter = 0
+    dets = 0
+    nondets = 0
+    detect = True
+    fps = FPS().start()
+    while not rospy.is_shutdown() or video.isOpened():
+        
+        # Grab next frame
+        ret, frame = video.read()
+        if not ret:
+            msg = Color.BLUE + "[INFO] Done processing." + Color.DONE
+            rospy.loginfo(msg)
+            detector_pub.publish(msg)
+            cv2.waitKey(2000)
+            break
+        elif cv2.waitKey(1) & 0xFF == ord ('q'):
+            msg = Color.BLUE + "[INFO] Quitting program." + Color.DONE
+            rospy.loginfo(msg)
+            detector_pub.publish(msg)
+            break
+
+        frame = imutils.resize(frame, width=800)
+        (H, W) = frame.shape[:2]
+        if det.get_w() is None or det.get_h() is None:
+            det.set_h(H)
+            det.set_w(W)
+        
+        # Perform detection 
+        if detect:
+            detect = False
+            dets += 1
+            # Get bounding boxes, condifences, indices and class IDs
+            boxes, confidences, indices, cls_ids = det.get_detections(net, frame)
+
+            for ix in indices:
+                i = ix[0]
+                box = boxes[i]
+                x, y, w, h = box
+                x, y, w, h = int(x), int(y), int(w), int(h)
+
+            det.draw_prediction(frame, cls_ids[i], confidences[i], x, y, x+w, y+h)
+
+            # Publish detections
+            det_str = "Det: {}, BBoxes {}".format(dets, boxes)
+            msg = Color.BLUE + det_str + Color.DONE
+            rospy.loginfo(msg)
+            detector_pub.publish(msg)
+
+        else:
+            nondets += 1
+            counter += 1
+            if counter == 24:
+                detect = True
+                counter = 0
+
+        fps.update()
+        fps.stop()
+
+        info = [
+            ("Detects: ", dets),
+            ("No detects: ", nondets),
+            ("FPS", "{:.2F}".format(fps.fps())),
+        ]
+        for (i, (k, v)) in enumerate(info):
+            text = "{}: {}".format(k, v)
+            cv2.putText(frame, text, (10, det.get_h() - ((i * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
+
+        # Show current frame
+        cv2.imshow("Frame", frame)
+
         rate.sleep()
 
 if __name__ == '__main__':
     try:
-        talker()
+        # Create publisher 
+        detector_pub = rospy.Publisher('detections', String, queue_size=10)
+        rospy.init_node('detector')
+        rate = rospy.Rate(10) # 10Hz
+        detect()
     except rospy.ROSInterruptException:
         pass
