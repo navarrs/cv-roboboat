@@ -73,10 +73,10 @@ rosrun boat detector_node.py --config vanttec/config/tiny3-vantec.cfg --weights 
 ```
 
 Ejemplo de resultado:
-<p align="center"><img src="./readme/det-track.png" /> </p>
+<p align="center"><img src="./readme/ros-det.png" /> </p>
 
 ## TO DO:
-- [ ] Nodo de deteccion
+- [x] Nodo de deteccion
 - [ ] Nodo de tracking
 - [ ] Nodo para webcams
 - [ ] Nodo para reconocimiento de color
