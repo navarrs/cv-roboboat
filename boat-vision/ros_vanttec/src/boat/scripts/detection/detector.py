@@ -59,6 +59,20 @@ class Detector():
 		""" Gets image blob. """
 		return cv2.dnn.blobFromImage(image, scale, (416,416), (0,0,0), True, crop=False)
 
+	def assert_bbox_size(self, x, y, w, h):
+		""" Check that bounding box matches frame size. """
+		if x < 0: # Left x
+			x = 0
+		if y < 0: # Top y
+			y = 0
+		if (x + w) > self.get_w(): 
+			# x + w = self.get_w
+			w = self.get_w() - x
+		if (y + h) > self.get_h():
+			h = self.get_h() - y
+		return x, y, w, h
+
+
 	def get_detections(self, net, image):
 		""" Computes detections and returns a list of bounding boxes, 
 			confidences, indices and class ids. """
@@ -77,18 +91,24 @@ class Detector():
 		for out in outs:
 			for detection in out:
 				scores = detection[5:]
-				class_id = np.argmax( scores )
+				class_id = np.argmax(scores)
 				confidence = scores[class_id]
+				
 				if confidence > 0.5:
-					center_x = int( detection[0] * self.W )
-					center_y = int( detection[1] * self.H )
-					w = int( detection[2] * self.W )
-					h = int( detection[3] * self.H )
-					x = center_x - w / 2
-					y = center_y - h / 2
-					class_ids.append( class_id )
-					confidences.append( float( confidence ) )
-					boxes.append( [x, y, w, h] )
+					center_x = int(detection[0] * self.W)
+					center_y = int(detection[1] * self.H)
+					
+					w = int(detection[2] * self.W)
+					h = int(detection[3] * self.H)
+					
+					x = int(center_x - w / 2)
+					y = int(center_y - h / 2)
+					
+					x, y, w, h = self.assert_bbox_size(x, y, w, h)
+
+					class_ids.append(class_id)
+					confidences.append(float(confidence))
+					boxes.append([x, y, w, h])
 
 		indices = cv2.dnn.NMSBoxes(boxes, confidences, self.conf_thresh, self.nms_thresh)
 		
@@ -98,17 +118,6 @@ class Detector():
 		""" Draws bounding boxes to image. """
 		label = str( self.classes[class_id] )
 		color = self.COLORS[class_id] 
-		
-		# if x1 < 0:
-			
-		# 	x2 = self.get_w
-		# if not y2 <= self.get_h:
-		# 	y2 + self.get_h
-
-		# if not x2 <= self.get_w:
-		# 	x2 = self.get_w
-		# if not y2 <= self.get_h:
-		# 	y2 + self.get_h
 		cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
 		cv2.putText(img, label, (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 

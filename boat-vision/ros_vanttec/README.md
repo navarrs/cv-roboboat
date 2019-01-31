@@ -34,19 +34,19 @@ catkin_make
 source devel/setup.bash
 ```
 
-## Crear paquete en ambiente
+Crear paquete en ambiente
 ```
 roscd ~/ros_vantec/src
 catkin_create_pkg boat roscpp rospy std_msg cv_bridge
 ```
 
-## En el CMakeLists.txt que se encuentra en el paquete boat agregar lo siguiente:
+En el CMakeLists.txt que se encuentra en el paquete boat agregar lo siguiente:
 ```
 find_package(OpenCV 3 REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 ```
 
-## Finalmente, ejecutar:
+Finalmente, ejecutar:
 ```
 cd ~/ros_vanttec
 catkin_make
@@ -76,7 +76,7 @@ Ejemplo de resultado:
 <p align="center"><img src="./readme/det-track.png" /> </p>
 
 ## TO DO:
-- [ ] Nodo de deteccion 
+- [ ] Nodo de deteccion
 - [ ] Nodo de tracking
 - [ ] Nodo para webcams
 - [ ] Nodo para reconocimiento de color
