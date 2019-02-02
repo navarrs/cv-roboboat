@@ -1,0 +1,23 @@
+<launch>
+
+	<node name = "usb_cam1" pkg="usb_cam" type="usb_cam_node">
+		<param name="video_device" value="/dev/video0"/>
+		<param name="pixel_format" value="yuyv"/>			
+	</node>
+
+	<node name = "usb_cam2" pkg="usb_cam" type="usb_cam_node">
+		<param name="video_device" value="/dev/video1"/>
+		<param name="pixel_format" value="yuyv"/>			
+	</node>
+	
+	<node name="image_view1" pkg="image_view" type="image_view" respawn="false" output="screen">
+		<remap from="image" to="/imagen_modificada" />
+	</node>
+	
+	<node name="image_view2" pkg="image_view" type="image_view" respawn="false" output="screen">
+		<remap from="image" to="/imagen_modificada2" />
+	</node>
+	
+</launch>
+	
+	
