@@ -28,6 +28,7 @@ lista de imagenes para calibración: stereo_calib.xml
 ### Rectificación:
 <p align="center"><img src="./readme/rectified.png" /> </p>
 
-
+###Disparity map
+<p align="center"><img src="./readme/disparity.jpg" /> </p>
 
 
