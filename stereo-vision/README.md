@@ -25,6 +25,7 @@ Dentro de la carpeta calibración, ejecutar:
 -h= # de esquinas de adentro de altura
 lista de imagenes para calibración: stereo_calib.xml
 
+<p align="center"><img src="./readme/rectification.jpg" /> </p>
 
 
 
