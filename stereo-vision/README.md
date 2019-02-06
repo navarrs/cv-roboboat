@@ -17,6 +17,17 @@ Implementación de sistema de vision stereo para calculo de distancias.
 
 OpenCV 3.1
 
+### Correr
+Tomar fotografias para calibrar camaras. 
+Correr:
+```
+./image_cap.cpp
+```
+Creas lista de imagenes:
+*lista debe de estar derecha - izquierda - derecha - izquierda
+```
+./imagelist_creator.cpp stereo_calib.xml *.jpg
+```
 Dentro de la carpeta calibración, ejecutar:
 ```
 ./stereo_calib -w=8 -h=6  stereo_calib.xml
@@ -28,7 +39,7 @@ lista de imagenes para calibración: stereo_calib.xml
 ### Rectificación:
 <p align="center"><img src="./readme/rectified.png" /> </p>
 
-###Disparity map
+### Disparity map
 <p align="center"><img src="./readme/disparity.jpg" /> </p>
 
 
