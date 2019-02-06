@@ -28,6 +28,7 @@ Creas lista de imagenes:
 ```
 ./imagelist_creator.cpp stereo_calib.xml *.jpg
 ```
+### Rectificación:
 Dentro de la carpeta calibración, ejecutar:
 ```
 ./stereo_calib -w=8 -h=6  stereo_calib.xml
@@ -36,10 +37,13 @@ Dentro de la carpeta calibración, ejecutar:
 -h= # de esquinas de adentro de altura
 lista de imagenes para calibración: stereo_calib.xml
 
-### Rectificación:
 <p align="center"><img src="./readme/rectified.png" /> </p>
 
+
 ### Disparity map
+```
+./stereo_match lefttest.jpg righttest.jpg -algorithm=sgbm3way -blocksize=15 -max-disparity=16*8 -scale=.5 -i=intrinsics.yml -e=extrinsics.yml -o=disparity.jpg -p=point.txt
+```
 <p align="center"><img src="./readme/disparity.jpg" /> </p>
 
 
