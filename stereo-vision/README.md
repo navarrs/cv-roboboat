@@ -16,8 +16,19 @@ Implementación de sistema de vision stereo para calculo de distancias.
 ### Requisitos
 
 OpenCV 3.1
+Dos Camaras Web
 
 ### Correr
+*Asegurarse que todas las funciones automaticas de las camas web esten desabilitadas
+Si se utiliza Webcam Logitec 920C
+```
+v4l2-ctl --list-devices
+v4l2-ctl --device=2 -l
+v4l2-ctl --device=2 --set-ctrl=focus_auto=0
+v4l2-ctl --device=2 --set-ctrl=exposure_auto=1
+v4l2-ctl --device=1 --set-ctrl=exposure_auto_priority=0
+```
+
 Tomar fotografias para calibrar camaras. 
 Correr:
 ```
