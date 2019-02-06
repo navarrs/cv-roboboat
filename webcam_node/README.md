@@ -12,10 +12,16 @@ sudo apt-get install ros-kinetic-cv-bridge
 
 ```
 
+### Modificar entrada de las camaras
+Para modificar la entrada de las camaras cambias el valor de video_device en los nodos usb_cam, en el archivo .launch
+
+```
+<param name="video_device" value="/dev/video1"/>
+```
+
 ### Ejecutar Nodo
 
 1.Se ejecuta el archivo launch en la carpeta launch
-
 
 ```
 roslaunch camara_launch.launch
@@ -28,5 +34,6 @@ roslaunch camara_launch.launch
 python nodo_camaras_ros_cv.py
 
 ```
+3.El resultado es el siguiente
 
 
