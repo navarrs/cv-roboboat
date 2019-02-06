@@ -1,9 +1,16 @@
 /*
  *  stereo_match.cpp
  *  calibration
- *
  *  Created by Victor  Eruhimov on 1/18/10.
  *  Copyright 2010 Argus Corp. All rights reserved.
+ 
+ """
+	@modified: Tues Feb 06, 2019
+	@author: Ivana Collado
+	@brief: Stereo Calibration for depth perseption
+	@file: stereo_match.cpp
+	@version: 2.0
+"""
  *
  */
 
