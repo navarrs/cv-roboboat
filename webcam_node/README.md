@@ -21,6 +21,8 @@ Para modificar la entrada de las camaras cambias el valor de video_device en los
 
 ### Ejecutar Nodo
 
+En el ambiente catkin:
+
 1.Se ejecuta el archivo launch en la carpeta launch
 
 ```
@@ -34,6 +36,6 @@ roslaunch camara_launch.launch
 python nodo_camaras_ros_cv.py
 
 ```
-3.El resultado es el siguiente
-
+3.El resultado es el siguiente:
+<p align="center"><img src="./readme/ej1.png" /> </p>
 
