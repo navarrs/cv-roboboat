@@ -28,9 +28,15 @@ v4l2-ctl --device=2 --set-ctrl=focus_auto=0
 v4l2-ctl --device=2 --set-ctrl=exposure_auto=1
 v4l2-ctl --device=1 --set-ctrl=exposure_auto_priority=0
 ```
+###Correr:
+```
+cmake .
+make image_cap
+make stereo_calib
+make stereo_match
+```
 
 Tomar fotografias para calibrar camaras. 
-Correr:
 ```
 ./image_cap.cpp
 ```
