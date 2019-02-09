@@ -13,18 +13,14 @@ from imutils.video import FPS, VideoStream
 import time
 
 def get_output_layers(net):
-	"""
-		Gets layers that make detections.
-	"""
+	""" Gets layers that make detections. """
 	layer_names = net.getLayerNames()
 	output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 	return output_layers
 
 class Detector():
 	def __init__( self, cfg, weights, class_file, conf_thresh=0.5, nms_thresh=0.4 ):
-		"""
-			Constructor.
-		"""
+		""" Constructor."""
 		self.config  = cfg
 		self.weights = weights
 		with open(class_file, 'r') as f:
@@ -70,6 +66,7 @@ class Detector():
 			w = self.get_w() - x
 		if (y + h) > self.get_h():
 			h = self.get_h() - y
+		
 		return x, y, w, h
 
 
