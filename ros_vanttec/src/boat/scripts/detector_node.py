@@ -20,6 +20,9 @@ from std_msgs.msg import String
 from imutils.video import VideoStream
 from imutils.video import FPS
 
+from custom_msgs.srv import ColorDeImagen
+from cv_bridge import CvBridge, CvBridgeError
+
 import imutils
 import argparse
 import numpy as np 
@@ -35,11 +38,28 @@ ap.add_argument('--classes', required=True, help = 'Path to text file containing
 ap.add_argument('--video', required=True, help = 'Path to the video' )
 args = ap.parse_args()
 
+bridge = CvBridge()
+
 class Color():
     BLUE  = '\033[94m'
     GREEN = '\033[92m'
     RED  = '\033[91m'
     DONE  = '\033[0m'
+
+def enviar_img(img,x,y,w,h):
+
+	global bridge
+
+	img = bridge.cv2_to_imgmsg(img, encoding = "bgr8")
+	rospy.wait_for_service("/get_color")
+	try:
+		service = rospy.ServiceProxy("/get_color", ColorDeImagen)
+		color = service(img,x,y,w,h)
+		#rospy.loginfo(color)
+		return color
+	except rospyServicesException as e:
+		rospy.logerr(e)
+
 
 def send_message(color, msg):
     """ Publish message to ros node. """
@@ -113,7 +133,12 @@ def detect():
             box = boxes[i]
             x, y, w, h = box
             x, y, w, h = int(x), int(y), int(w), int(h)
-            det.draw_prediction(frame, cls_ids[i], confidences[i], x, y, x+w, y+h)
+            
+            color = enviar_img(frame,x,y,h,w)
+            
+            color = str(color.color)
+            
+            det.draw_prediction(frame, cls_ids[i], confidences[i], color, x, y, x+w, y+h)
 
         fps.update()
         fps.stop()

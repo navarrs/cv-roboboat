@@ -114,12 +114,15 @@ class Detector():
 		
 		return boxes, confidences, indices, class_ids
 
-	def draw_prediction(self, img, class_id, confidence, x1, y1, x2, y2):
+
+	def draw_prediction(self, img, class_id, confidence, color_obj, x1, y1, x2, y2):
+
 		""" Draws bounding boxes to image. """
 		label = str( self.classes[class_id] )
 		color = self.COLORS[class_id] 
 		cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
-		cv2.putText(img, label, (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+		cv2.putText(img, label, (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
+		cv2.putText(img, color_obj, (x2, y2+10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
 
 
 
