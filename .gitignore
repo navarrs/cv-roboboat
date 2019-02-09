@@ -1,17 +1,8 @@
-vot/vantec
-vot/yolov3
-DarknetROS/build
-DarknetROS/devel
-DarknetROS/src/darknet_ros/darknet
-DarknetROS/src/darknet_ros/darknet_ros/yolo_network_config
 darknet2
-
 datasets
 number_svm
-DarknetROS
 tesseract
-vot
-boat-vision/vanttec
+vanttec
 
 ros_vanttec/build/*
 ros_vanttec/devel/*
@@ -20,5 +11,5 @@ ros_vanttec/src/boat/*.txt
 ros_vanttec/src/boat/*.xml
 
 *.pyc
-*__init__.pyt
+*__init__.py
 *__pycache__
