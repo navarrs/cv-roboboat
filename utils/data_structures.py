@@ -1,4 +1,4 @@
-"""
+  """
     @modified: Fri Feb 8, 2019
     @author: Ingrid Navarro 
     @file: data_structures.py
@@ -11,7 +11,7 @@ bbox = (10, 20, 30, 30)
 # objects_1 = { '1' : { 'class': 'sea marker', 'bbox' : bbox, 'color': 'red', 'lives': 50} }
 
 # Aqui el ID puede ser la posicion del objeto dentro de la lista. 
-objects_2 = { 'sea marker' : [{'bbox': bbox,  'color': 'red',   'lives': 40}, 
+objects = { 'sea marker' : [{'bbox': bbox,  'color': 'red',   'lives': 40}, 
                               {'bbox': bbox,  'color': 'green', 'lives': 40}
                              ],
 
@@ -29,16 +29,16 @@ def iterate_all(dic):
             print obj[i]
 
 
-iterate_all(objects_2)
+iterate_all(objects)
 
 # Agregar elemento 
 new_dict = {'bbox': bbox, 'color':'green', 'lives' : 40}
-objects_2['sea marker'].append(new_dict)
+objects['sea marker'].append(new_dict)
 iterate_all(objects_2)
 
 # Modificar lives 
 object_id = 0
-objects_2['buoy'][object_id]['lives'] -= 1
-iterate_all(objects_2)
+objects['buoy'][object_id]['lives'] -= 1
+iterate_all(objects)
 
 
