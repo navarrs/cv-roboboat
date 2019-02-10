@@ -20,13 +20,16 @@ Dos Camaras Web
 
 ### Correr
 *Asegurarse que todas las funciones automaticas de las camas web esten desabilitadas
-Si se utiliza Webcam Logitec 920C
+Si se utiliza Webcam Logitec 920C estos son los comandos y se deben de deshabilitar cada vez que se conecten las camaras o se reinicie la computadora
 ```
 v4l2-ctl --list-devices
 v4l2-ctl --device=2 -l
+v4l2-ctl --device=1 --set-ctrl=focus_auto=0
+v4l2-ctl --device=1 --set-ctrl=exposure_auto=1
+v4l2-ctl --device=1 --set-ctrl=exposure_auto_priority=0
 v4l2-ctl --device=2 --set-ctrl=focus_auto=0
 v4l2-ctl --device=2 --set-ctrl=exposure_auto=1
-v4l2-ctl --device=1 --set-ctrl=exposure_auto_priority=0
+v4l2-ctl --device=2 --set-ctrl=exposure_auto_priority=0
 ```
 ###Correr:
 ```
