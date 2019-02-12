@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 """
     @modified: Wed Jan 30, 2019
     @author: Ingrid Navarro 
@@ -7,9 +6,8 @@
     @version: 1.0
     @brief:    
         This code implements a ROS node to perform object detection and classification 
-        using YOLO detection framework. 
-        Node receives frames from 'camera' node and publishes the class, color and 
-        coordinates of the detected objects. 
+        using YOLO detection frameworks. Node receives frames from another node and 
+        publishes the coordinates of the detected objects. 
     @requirements: 
         Tested on python2.7 and python3.6. 
         OpenCV version 3.4+ (because it uses the "dnn" module).
@@ -17,7 +15,6 @@
         Tested on ROS Kinetic. 
         Tested on Ubuntu 16.04 LTS
 """
-
 from detection.detector import Detector 
 from std_msgs.msg import String
 from imutils.video import VideoStream
@@ -46,48 +43,44 @@ bridge = CvBridge()
 class Color():
     BLUE  = '\033[94m'
     GREEN = '\033[92m'
-    RED   = '\033[91m'
+    RED  = '\033[91m'
     DONE  = '\033[0m'
 
 def enviar_img(img,x,y,w,h):
-    global bridge
-    img = bridge.cv2_to_imgmsg(img, encoding = "bgr8")
-    rospy.wait_for_service("/get_color")
-    try:
-        service = rospy.ServiceProxy("/get_color", ColorDeImagen)
-        color = service(img,x,y,w,h)
-        #rospy.loginfo(color)
-        return str(color.color)
-    except rospyServicesException as e:
-        rospy.logerr(e)
 
-def send_message(color, msg, det=True):
+	global bridge
+
+	img = bridge.cv2_to_imgmsg(img, encoding = "bgr8")
+	rospy.wait_for_service("/get_color")
+	try:
+		service = rospy.ServiceProxy("/get_color", ColorDeImagen)
+		color = service(img,x,y,w,h)
+		#rospy.loginfo(color)
+		return color
+	except rospyServicesException as e:
+		rospy.logerr(e)
+
+
+def send_message(color, msg):
     """ Publish message to ros node. """
     msg = color + msg + Color.DONE
     rospy.loginfo(msg)
-    if det:
-        detector_pub.publish(msg)
-    else:
-        infomsg_pub.publish(msg)
+    detector_pub.publish(msg)
 
 def detect():
-    """ 
-        Performs object detection and publishes a data structure that contains, 
-        instance coordinates, instance class and sets a counter that will be used 
-        by the tracker. 
-    """
+    """ Performs object detection and publishes coordinates. """
     
     # Initialize detector 
-    send_message(Color.GREEN, "[INFO] Initializing TinyYOLOv3 detector.", False)
+    send_message(Color.GREEN, "[INFO] Initializing TinyYOLOv3 detector.")
     det = Detector(args.config, args.weights, args.classes)
     (H, W) = (None, None)
 
     # Load model 
-    send_message(Color.GREEN, "[INFO] Loading network model.", False)
+    send_message(Color.GREEN, "[INFO] Loading network model.")
     net = det.load_model()
 
     # Initilialize Video Stream
-    send_message(Color.GREEN, "[INFO] Starting video stream.", False)
+    send_message(Color.GREEN, "[INFO] Starting video stream.")
     if args.video == "0":
         video = cv2.VideoCapture(0)
     else:
@@ -95,19 +88,20 @@ def detect():
 
     counter = 0
     dets = 0
+    nondets = 0
     detect = True
     fps = FPS().start()
-    boxes, indices, cls_ids = [], [], []
-    
+    boxes, confidences, indices, cls_ids = [], [], [], []
+
     while not rospy.is_shutdown() or video.isOpened():
         # Grab next frame
         ret, frame = video.read()
         if not ret:
-            send_message(Color.RED, "[DONE] Finished processing.", False)
+            send_message(Color.RED, "[DONE] Finished processing.")
             cv2.waitKey(2000)
             break
         elif cv2.waitKey(1) & 0xFF == ord ('q'):
-            send_message(Color.RED, "[DONE] Quitting program.", False)
+            send_message(Color.RED, "[DONE] Quitting program.")
             break
 
         frame = imutils.resize(frame, width=1000)
@@ -116,35 +110,18 @@ def detect():
             det.set_h(H)
             det.set_w(W)
         
-        # Perform detection
-        color = None
+        # Perform detection 
         if detect:
             detect = False
             dets += 1
-            
-            # Data structure to send over topic
-            objects = dict()
-            objects['buoy'] = []   # Class 0
-            objects['marker'] = [] # Class 1
-
             # Get bounding boxes, condifences, indices and class IDs
-            boxes, indices, cls_ids = det.get_detections(net, frame)
-
-            for i in range(len(cls_ids)):
-                x, y, w, h = boxes[i]
-                color = enviar_img(frame, x, y, h, w)
-                new_obj = {'bbox': boxes[i], 'color': color, 'lives' : 40}
-                if cls_ids[i] == 1:
-                    objects['marker'].append(new_obj)
-                elif cls_ids[i] == 0:
-                    objects['buoy'].append(new_obj)
-                else:
-                    print "Error."
+            boxes, confidences, indices, cls_ids = det.get_detections(net, frame)
 
             # Publish detections
-            det_str = "Det: {}, BBoxes {}".format(dets, objects)
+            det_str = "Det: {}, BBoxes {}".format(dets, boxes)
             send_message(Color.BLUE, det_str)
         else:
+            nondets += 1
             counter += 1
             if counter == 24:
                 detect = True
@@ -156,14 +133,19 @@ def detect():
             box = boxes[i]
             x, y, w, h = box
             x, y, w, h = int(x), int(y), int(w), int(h)
-            color = enviar_img(frame, x, y, h, w)
-
-            det.draw_prediction(frame, cls_ids[i], color, x, y, x+w, y+h)
+            
+            color = enviar_img(frame,x,y,h,w)
+            
+            color = str(color.color)
+            
+            det.draw_prediction(frame, cls_ids[i], confidences[i], color, x, y, x+w, y+h)
 
         fps.update()
         fps.stop()
 
         info = [
+            ("Detects: ", dets),
+            ("No detects: ", nondets),
             ("FPS", "{:.2F}".format(fps.fps())),
         ]
         for (i, (k, v)) in enumerate(info):
@@ -172,12 +154,12 @@ def detect():
 
         # Show current frame
         cv2.imshow("Frame", frame)
+
         rate.sleep()
 
 if __name__ == '__main__':
     try:
         # Create publisher 
-        infomsg_pub = rospy.Publisher('infomsg', String, queue_size=10)
         detector_pub = rospy.Publisher('detections', String, queue_size=10)
         rospy.init_node('detector')
         rate = rospy.Rate(10) # 10Hz

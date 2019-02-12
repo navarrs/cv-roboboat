@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-
 """
     @modified: Wed Jan 30, 2019
-    @author: Ingrid Navarro 
+    @authors: Ingrid Navarro 
     @file: detector_node.py
     @version: 1.0
     @brief:    
@@ -23,9 +22,6 @@ from std_msgs.msg import String
 from imutils.video import VideoStream
 from imutils.video import FPS
 
-from custom_msgs.srv import ColorDeImagen
-from cv_bridge import CvBridge, CvBridgeError
-
 import imutils
 import argparse
 import numpy as np 
@@ -41,25 +37,11 @@ ap.add_argument('--classes', required=True, help = 'Path to text file containing
 ap.add_argument('--video', required=True, help = 'Path to the video' )
 args = ap.parse_args()
 
-bridge = CvBridge()
-
 class Color():
     BLUE  = '\033[94m'
     GREEN = '\033[92m'
     RED   = '\033[91m'
     DONE  = '\033[0m'
-
-def enviar_img(img,x,y,w,h):
-    global bridge
-    img = bridge.cv2_to_imgmsg(img, encoding = "bgr8")
-    rospy.wait_for_service("/get_color")
-    try:
-        service = rospy.ServiceProxy("/get_color", ColorDeImagen)
-        color = service(img,x,y,w,h)
-        #rospy.loginfo(color)
-        return str(color.color)
-    except rospyServicesException as e:
-        rospy.logerr(e)
 
 def send_message(color, msg, det=True):
     """ Publish message to ros node. """
@@ -98,6 +80,8 @@ def detect():
     detect = True
     fps = FPS().start()
     boxes, indices, cls_ids = [], [], []
+
+    
     
     while not rospy.is_shutdown() or video.isOpened():
         # Grab next frame
@@ -116,8 +100,7 @@ def detect():
             det.set_h(H)
             det.set_w(W)
         
-        # Perform detection
-        color = None
+        # Perform detection 
         if detect:
             detect = False
             dets += 1
@@ -131,9 +114,7 @@ def detect():
             boxes, indices, cls_ids = det.get_detections(net, frame)
 
             for i in range(len(cls_ids)):
-                x, y, w, h = boxes[i]
-                color = enviar_img(frame, x, y, h, w)
-                new_obj = {'bbox': boxes[i], 'color': color, 'lives' : 40}
+                new_obj = {'bbox': boxes[i], 'color':'green', 'lives' : 40}
                 if cls_ids[i] == 1:
                     objects['marker'].append(new_obj)
                 elif cls_ids[i] == 0:
@@ -144,6 +125,7 @@ def detect():
             # Publish detections
             det_str = "Det: {}, BBoxes {}".format(dets, objects)
             send_message(Color.BLUE, det_str)
+
         else:
             counter += 1
             if counter == 24:
@@ -156,9 +138,7 @@ def detect():
             box = boxes[i]
             x, y, w, h = box
             x, y, w, h = int(x), int(y), int(w), int(h)
-            color = enviar_img(frame, x, y, h, w)
-
-            det.draw_prediction(frame, cls_ids[i], color, x, y, x+w, y+h)
+            det.draw_prediction(frame, cls_ids[i], x, y, x+w, y+h)
 
         fps.update()
         fps.stop()
@@ -172,6 +152,7 @@ def detect():
 
         # Show current frame
         cv2.imshow("Frame", frame)
+
         rate.sleep()
 
 if __name__ == '__main__':

@@ -1,34 +1,30 @@
 """
 	@modified: Wed Dec 19, 2018
-	@author: Ingrid Navarro  
+	@author: Ingrid Navarro 
+	@brief: Perform object detection using YOLO framework. 
 	@file: detection.py
 	@version: 1.0
-	@brief: 
-		This code implements a class that performs object 
-		detection using the YOLO framework. 
-	@requirements:
-		Tested on python2.7 and python3.6. 
-        OpenCV version 3.4+ (because it uses the "dnn" module).
-        Cuda version 8.0
-        Tested on ROS Kinetic. 
-        Tested on Ubuntu 16.04 LTS
 """
-from imutils.video import FPS, VideoStream
 
 import cv2
 import numpy as np 
 import imutils
+from imutils.video import FPS, VideoStream
 import time
 
 def get_output_layers(net):
-	""" Gets layers that make detections. """
+	"""
+		Gets layers that make detections.
+	"""
 	layer_names = net.getLayerNames()
 	output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 	return output_layers
 
 class Detector():
 	def __init__( self, cfg, weights, class_file, conf_thresh=0.5, nms_thresh=0.4 ):
-		""" Constructor."""
+		"""
+			Constructor.
+		"""
 		self.config  = cfg
 		self.weights = weights
 		with open(class_file, 'r') as f:
@@ -74,18 +70,16 @@ class Detector():
 			w = self.get_w() - x
 		if (y + h) > self.get_h():
 			h = self.get_h() - y
-		
 		return x, y, w, h
 
+
 	def get_detections(self, net, image):
-		""" 
-		    Computes detections and returns a list of bounding boxes, 
-			confidences, indices and class ids. 
-		"""
+		""" Computes detections and returns a list of bounding boxes, 
+			confidences, indices and class ids. """
 
 		# Get image blob
 		scale = 0.00392 # ?
-		blob = self.get_blob(scale, image)
+		blob = self.get_blob( scale, image )
 		net.setInput(blob)
 
 		# Detections
@@ -93,7 +87,7 @@ class Detector():
 		confidences = []
 		boxes = []
 		det = []
-		outs = net.forward(get_output_layers(net))
+		outs = net.forward( get_output_layers(net) )
 		for out in outs:
 			for detection in out:
 				scores = detection[5:]
@@ -118,15 +112,17 @@ class Detector():
 
 		indices = cv2.dnn.NMSBoxes(boxes, confidences, self.conf_thresh, self.nms_thresh)
 		
-		return boxes, indices, class_ids
+		return boxes, confidences, indices, class_ids
 
-	def draw_prediction(self, img, class_id, obj_color, x1, y1, x2, y2):
+
+	def draw_prediction(self, img, class_id, confidence, color_obj, x1, y1, x2, y2):
+
 		""" Draws bounding boxes to image. """
 		label = str( self.classes[class_id] )
 		color = self.COLORS[class_id] 
 		cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
-		cv2.putText(img, label, (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-		cv2.putText(img, obj_color, (x2, y2+10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
+		cv2.putText(img, label, (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
+		cv2.putText(img, color_obj, (x2, y2+10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
 
 
 
