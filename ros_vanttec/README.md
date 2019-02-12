@@ -52,6 +52,12 @@ En una terminal nueva, ejecutar:
 	rosrun detect detector_node.py --config vanttec/config/yolov3-vantec.cfg --weights vanttec/weights/yolov3-vantec.weights --classes vanttec/obj.names --video vanttec/video.mp4
 ```
 
+# Color detector Service
+En una terminal nueva, ejecutar:
+```
+	rosrun detect color_detector_service.py
+```
+
 Ejemplo de resultado:
 <p align="center"><img src="./readme/ros-det.png" /> </p>
 
@@ -74,8 +80,11 @@ Ejemplo de resultado:
 
 ## TO DO:
 - [x] Nodo de deteccion
+- [x] Servicio para reconocimiento de color
+- [x] Unir detector + color
+- [ ] Corregir formato del codigo
+- [ ] Update readme
 - [ ] Nodo de tracking 
 - [ ] Nodo para webcams
-- [ ] Nodo para reconocimiento de color
 - [ ] Nodo de estimacion de distancias
 - [ ] Nodo de deteccion de numeros

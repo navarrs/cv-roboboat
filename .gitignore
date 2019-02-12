@@ -10,6 +10,10 @@ ros_vanttec/vanttec/*
 ros_vanttec/src/boat/*.txt
 ros_vanttec/src/boat/*.xml
 
+boat-vision
+src
+stereo-vision
+
 *.pyc
 *__init__.py
 *__pycache__
