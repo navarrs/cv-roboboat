@@ -45,6 +45,26 @@ class Color():
     GREEN = '\033[92m'
     RED  = '\033[91m'
     DONE  = '\033[0m'
+    
+def add_brightness(image):
+    image_HLS = cv2.cvtColor(image,cv2.COLOR_RGB2HLS) ## Conversion to HLS
+    image_HLS = np.array(image_HLS, dtype = np.float64) 
+    random_brightness_coefficient = 1.5 ## generates value between 0.5 and 1.5
+    image_HLS[:,:,1] = image_HLS[:,:,1]*random_brightness_coefficient ## scale pixel values up or down for channel 1(Lightness)
+    image_HLS[:,:,1][image_HLS[:,:,1]>255]  = 255 ##Sets all values above 255 to 255
+    image_HLS = np.array(image_HLS, dtype = np.uint8)
+    image_RGB = cv2.cvtColor(image_HLS,cv2.COLOR_HLS2RGB) ## Conversion to RGB
+    return image_RGB
+
+def add_darkness(image):
+    image_HLS = cv2.cvtColor(image,cv2.COLOR_RGB2HLS) ## Conversion to HLS
+    image_HLS = np.array(image_HLS, dtype = np.float64) 
+    random_brightness_coefficient = 0.5 ## generates value between 0.5 and 1.5
+    image_HLS[:,:,1] = image_HLS[:,:,1]*random_brightness_coefficient ## scale pixel values up or down for channel 1(Lightness)
+    image_HLS[:,:,1][image_HLS[:,:,1]>255]  = 255 ##Sets all values above 255 to 255
+    image_HLS = np.array(image_HLS, dtype = np.uint8)
+    image_RGB = cv2.cvtColor(image_HLS,cv2.COLOR_HLS2RGB) ## Conversion to RGB
+    return image_RGB
 
 def enviar_img(img,x,y,w,h):
 
@@ -96,6 +116,14 @@ def detect():
     while not rospy.is_shutdown() or video.isOpened():
         # Grab next frame
         ret, frame = video.read()
+        
+    ##AQUI SE MODIFICA EL VIDEO
+        
+        #frame = add_brightness(frame)
+        #frame = add_darkness(frame)
+        
+        
+        
         if not ret:
             send_message(Color.RED, "[DONE] Finished processing.")
             cv2.waitKey(2000)
