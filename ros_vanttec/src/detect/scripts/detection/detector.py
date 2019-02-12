@@ -1,15 +1,23 @@
 """
 	@modified: Wed Dec 19, 2018
-	@author: Ingrid Navarro 
-	@brief: Perform object detection using YOLO framework. 
+	@author: Ingrid Navarro  
 	@file: detection.py
 	@version: 1.0
+	@brief: 
+		This code implements a class that performs object 
+		detection using the YOLO framework. 
+	@requirements:
+		Tested on python2.7 and python3.6. 
+        OpenCV version 3.4+ (because it uses the "dnn" module).
+        Cuda version 8.0
+        Tested on ROS Kinetic. 
+        Tested on Ubuntu 16.04 LTS
 """
+from imutils.video import FPS, VideoStream
 
 import cv2
 import numpy as np 
 import imutils
-from imutils.video import FPS, VideoStream
 import time
 
 def get_output_layers(net):
@@ -69,14 +77,15 @@ class Detector():
 		
 		return x, y, w, h
 
-
 	def get_detections(self, net, image):
-		""" Computes detections and returns a list of bounding boxes, 
-			confidences, indices and class ids. """
+		""" 
+		    Computes detections and returns a list of bounding boxes, 
+			confidences, indices and class ids. 
+		"""
 
 		# Get image blob
 		scale = 0.00392 # ?
-		blob = self.get_blob( scale, image )
+		blob = self.get_blob(scale, image)
 		net.setInput(blob)
 
 		# Detections
@@ -84,7 +93,7 @@ class Detector():
 		confidences = []
 		boxes = []
 		det = []
-		outs = net.forward( get_output_layers(net) )
+		outs = net.forward(get_output_layers(net))
 		for out in outs:
 			for detection in out:
 				scores = detection[5:]
@@ -109,9 +118,9 @@ class Detector():
 
 		indices = cv2.dnn.NMSBoxes(boxes, confidences, self.conf_thresh, self.nms_thresh)
 		
-		return boxes, confidences, indices, class_ids
+		return boxes, indices, class_ids
 
-	def draw_prediction(self, img, class_id, confidence, x1, y1, x2, y2):
+	def draw_prediction(self, img, class_id, x1, y1, x2, y2):
 		""" Draws bounding boxes to image. """
 		label = str( self.classes[class_id] )
 		color = self.COLORS[class_id] 

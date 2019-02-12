@@ -12,12 +12,12 @@ bbox = (10, 20, 30, 30)
 
 # Aqui el ID puede ser la posicion del objeto dentro de la lista. 
 objects = { 'sea marker' : [{'bbox': bbox,  'color': 'red',   'lives': 40}, 
-                              {'bbox': bbox,  'color': 'green', 'lives': 40}
-                             ],
+                            {'bbox': bbox,  'color': 'green', 'lives': 40}
+                           ],
 
-              'buoy' :       [{'bbox': bbox,  'color': 'white', 'lives': 40}, 
-                              {'bbox': bbox,  'color': 'green', 'lives': 40}
-                             ]
+              'buoy' :      [{'bbox': bbox,  'color': 'white', 'lives': 40}, 
+                             {'bbox': bbox,  'color': 'green', 'lives': 40}
+                            ]
 }
 
 # Iterar con la estructura de datos 
