@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  sensor_msgs
 )
 
 ## Include openCV
@@ -61,7 +62,7 @@ find_package(OpenCV 3 REQUIRED)
 ## Generate services in the 'srv' folder
 add_service_files(
    FILES
-   ColorDeImagen.srv
+   ObjectColor.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -72,10 +73,11 @@ add_service_files(
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+generate_messages(
+   DEPENDENCIES
+   sensor_msgs
+   std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -109,7 +111,7 @@ add_service_files(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES boat
-#  CATKIN_DEPENDS cv_bridge roscpp rospy std_msgs
+   CATKIN_DEPENDS cv_bridge roscpp rospy sensor_msgs std_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -120,7 +122,6 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
   ${catkin_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
 )

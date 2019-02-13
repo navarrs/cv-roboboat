@@ -1,7 +1,7 @@
 """
-	@modified: Wed Dec 19, 2018
-	@author: Ingrid Navarro  
-	@file: detection.py
+	@modified: Tue Feb 12, 2019
+	@author: IngridNavarroA
+	@file: detector.py
 	@version: 1.0
 	@brief: 
 		This code implements a class that performs object 
@@ -120,15 +120,10 @@ class Detector():
 		
 		return boxes, indices, class_ids
 
-	def draw_prediction(self, img, class_id, obj_color, x1, y1, x2, y2):
+	def draw_prediction(self, img, class_id, obj_color, obj_id, x1, y1, x2, y2):
 		""" Draws bounding boxes to image. """
 		label = str( self.classes[class_id] )
+		tag = "{},{},{}".format(label, obj_color, obj_id)
 		color = self.COLORS[class_id] 
 		cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
-		cv2.putText(img, label, (x2, y2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-		cv2.putText(img, obj_color, (x2, y2+10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2)
-
-
-
-
-		
+		cv2.putText(img, tag, (x1, y1-5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)

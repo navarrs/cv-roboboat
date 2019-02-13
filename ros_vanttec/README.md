@@ -55,11 +55,11 @@ En una terminal nueva, ejecutar:
 # Color detector Service
 En una terminal nueva, ejecutar:
 ```
-	rosrun detect color_detector_service.py
+	rosrun detect color_detector_srv.py
 ```
 
 Ejemplo de resultado:
-<p align="center"><img src="./readme/ros-det.png" /> </p>
+<p align="center"><img src="./readme/ros-det-col.png" /> </p>
 
 ## Referencias
 ```
@@ -82,9 +82,8 @@ Ejemplo de resultado:
 - [x] Nodo de deteccion
 - [x] Servicio para reconocimiento de color
 - [x] Unir detector + color
-- [ ] Corregir formato del codigo
-- [ ] Update readme
-- [ ] Nodo de tracking 
-- [ ] Nodo para webcams
-- [ ] Nodo de estimacion de distancias
-- [ ] Nodo de deteccion de numeros
+- [ ] Detectar color blanco
+- [ ] Tracking 
+- [ ] Publisher de imagenes + stereo (simultaneos)
+- [ ] Estimacion de distancias
+- [ ] Deteccion de numeros
