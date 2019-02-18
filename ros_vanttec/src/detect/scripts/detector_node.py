@@ -125,14 +125,14 @@ def detect(config, weights, classes, video):
                 counter = 0
         
         # If there were any previous detections, draw them
-        obj = 0
+        obj = len(objects.items()) - 1
         for obj_cls, detections in objects.items():
             for params in detections:
                 x, y, w, h = params['bbox']
                 color = get_object_color(frame, x, y, h, w)
                 obj_id = params['id']
                 det.draw_prediction(frame, obj, color, str(obj_id), x, y, x+w, y+h)
-            obj += 1
+            obj -= 1
 
         fps.update()
         fps.stop()
