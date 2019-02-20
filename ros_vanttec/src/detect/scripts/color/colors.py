@@ -14,7 +14,7 @@
         Tested on ROS Kinetic. 
 """
 from cv_bridge import CvBridge, CvBridgeError
-from detect.srv import ColorDeImagen
+from detect.srv import ObjectColor
 
 import rospy
 import cv2
@@ -37,7 +37,7 @@ def get_object_color(image, x, y, w, h):
 
     try:
         rospy.wait_for_service("/get_object_color", timeout=5.0)
-        service = rospy.ServiceProxy("/get_object_color", ColorDeImagen)
+        service = rospy.ServiceProxy("/get_object_color", ObjectColor)
         color = service(image,x,y,w,h)
         #rospy.loginfo(color)
         return str(color.color)
