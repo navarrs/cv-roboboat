@@ -123,6 +123,7 @@ class Detector():
 
 	def draw_prediction(self, img, class_id, obj_color, obj_id, x1, y1, x2, y2):
 		""" Draws bounding boxes to image. """
+		label = str( self.classes[class_id] )
 		tag = "{},{},{}".format(class_id, obj_color, obj_id)
 		color = self.COLORS[class_id] 
 		cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)

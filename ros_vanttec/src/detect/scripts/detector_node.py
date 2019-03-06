@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 """
     @modified: Wed Feb 20, 2019
     @author: IngridNavarroA and fitocuan
@@ -18,6 +17,8 @@
         Tested on Ubuntu 16.04 LTS
 """
 from detection.detector import Detector 
+from tracking.tracks import Object 
+from tracking.tracks import Tracks 
 from color.colors import *
 from std_msgs.msg import String
 from imutils.video import VideoStream
@@ -49,6 +50,8 @@ def detect(config, weights, classes, video):
     det = Detector(config, weights, classes)
     (H, W) = (None, None)
 
+    tracks = Tracks()
+
     # Initilialize Video Stream
     send_message(Color.GREEN, "[INFO] Starting video stream.", False)
     if video == "0":
@@ -56,8 +59,7 @@ def detect(config, weights, classes, video):
     else:
         video = cv2.VideoCapture(args.video)
 
-    counter = 0
-    ID = 0
+    counter, N = 0, 12
     detect = True
     fps = FPS().start()
     boxes, indices, cls_ids = [], [], []
@@ -84,45 +86,54 @@ def detect(config, weights, classes, video):
         # Modify frame brightness if necessary
         # frame = change_brightness(frame, 0.8) # Decrease
         # frame = change_brightness(frame, 1.5) # Increase
-        
-        # Perform detection
+
+      	# Every n frames perform detection
         if detect:
-            detect = False
-            objects = []
+        	boxes, indices, cls_ids = det.get_detections(det.net, frame)
+        	print(len(boxes))
+        	objects = []
+        	# Create objects and update tracks
+        	for i in range(len(cls_ids)):
+        		x, y, w, h = boxes[i]
+        		# Create object with attributes: class, color, localization
+        		obj = Object(cls_ids[i], 
+        					get_object_color(frame, x, y, w, h), 
+        					boxes[i], 
+        					cv2.TrackerKCF_create())
+        		obj.tracker.init(frame, (x, y, w, h))
+        		obj.print_object()
+        		objects.append(obj)
+        		det.draw_prediction(frame, obj.clss, obj.color, obj.id, int(x), int(y), int(x+w), int(y+h))
+        	tracks.update(objects)
+        	detect = False
 
-            # Get bounding boxes, condifences, indices and class IDs
-            boxes, indices, cls_ids = det.get_detections(det.net, frame)
-
-            for i in range(len(cls_ids)):
-                x, y, w, h = boxes[i]
-                obj = {
-                	'class'  : cls_ids[i],
-                	'bbox'   : boxes[i], 
-                	'tracker': cv2.TrackerKCF_create(),
-                	'color'  : get_object_color(frame, x, y, h, w), 
-                	'lives'  : 40, 
-                	'id'     : ID
-                }
-                obj['tracker'].init(frame, (x, y, w, h))
-                objects.append(obj)
-                det.draw_prediction(frame, obj['class'], obj['color'], obj['id'], x, y, x+w, y+h)
-                ID += 1
+        # While counter < n, only update bounding boxes
         else:
-        	# Update tracker
-        	for obj in objects:	
-	        	(succ, bbox) = obj['tracker'].update(frame)
-	        	obj['bbox'] = bbox
-	        	x, y, w, h = bbox
-	        	det.draw_prediction(frame, obj['class'], obj['color'], obj['id'], int(x), int(y), int(x+w), int(y+h))
-
-        	counter += 1
-        	if counter == 24:
-        		detect = True
-        		ID = 0
+        	if counter == N:
         		counter = 0
+        		detect = True
+        	
+        	for o in tracks.objects:
+        		print(o)
+        		obj = tracks.get_object(o)
+        		obj.print_object()
+        		(succ, bbox) = obj.tracker.update(frame)
+        		if not succ:
+        			obj.lives -= 1
+        			if obj.lives == 0:
+        				tracks.delete_object(o)
+        				# continue ?
+        		else:
+        			obj.bbox = bbox
+        		
+        		x, y, w, h = obj.bbox
+        		det.draw_prediction(frame, obj.clss, obj.color, obj.id, int(x), int(y), int(x+w), int(y+h))
         
+        
+
         # Publish detections
-        det_str = "Detections: {}".format(objects)
+        counter += 1
+        det_str = "Detections {}: {}".format(counter, objects)
         send_message(Color.BLUE, det_str)
 
         fps.update()
