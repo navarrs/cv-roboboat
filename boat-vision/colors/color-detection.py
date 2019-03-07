@@ -1,6 +1,4 @@
 # import necessary packages
-from matplotlib import  pyplot as plt
-import numpy as np
 import argparse
 import cv2
 
@@ -11,28 +9,36 @@ args = vars(ap.parse_args())
 
 # load the image and show it
 image = cv2.imread(args["image"])
+image = cv2.resize(image, (340, 220))
 cv2.imshow("image", image)
 
-# convert the image to hsv and crate a histogram
+# convert the image to hsv
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-cv2.imshow("hsv", hsv)
-hist = cv2.calcHist([hsv], [0], None, [6], [0, 180])
-# hist[0][0] accesses the number of pixels belonging to bin 0 (red)
 
-# print the most frequent color range from the six bins
-colors = ["red", "yellow-green", "green", "blue", "blue-magenta", "magenta-red"]
-hist_list = [hist[i][0] for i in range(len(hist))]
-hist_dic = dict(zip(hist_list, colors))
-print(hist_dic)
-print("The most abundant color in the picture was: " + str(hist_dic[max(hist_dic)]))
+# split each channel from hsv tensor
+(h, s, v) = cv2.split(image)
 
-# plot figure
-plt.figure()
-plt.title("HSV Histogram")
-plt.xlabel("Bins")
-plt.ylabel("# of pixels")
-plt.plot(hist)
-plt.xlim([0, 5])
-plt.show()
+if np.median(s) < 50:
+    predicted_color = "white"
+else:
+    # use histogram obtain frequency of hue regions of interest
+    # in this case its useful to divide it in 6 regions of equal length
+    # then map color code to frequency using the histogram
+    hist = cv2.calcHist([hsv], [0], None, [6], [0, 180])
+    colors = ["red", "green", "green", "blue", "blue", "red"]
+
+    # uncomment in case 6 bins case is detecting false positives use 12 and adjust color mapping
+    # hist = cv2.calcHist([hsv], [0], None, [12], [0, 180])
+    # colors = ["red", "-", "-", "green", "green", "-", "-", "blue", "blue", "-", "-", "red"]
+
+    hist_list = [hist[i][0] for i in range(len(hist))]
+    hist_dic = dict(zip(hist_list, colors))
+
+    # uncomment to see the frequencies of each color region
+    # print(hist_dic)
+
+    # predicted_color contains the region of maximum frequency
+    predicted_color = hist_dic[max(hist_dic)]
+    print("Predicted color: " + predicted_color)
 
 cv2.waitKey(0)
