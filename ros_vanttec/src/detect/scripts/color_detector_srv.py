@@ -24,17 +24,15 @@ bridge = CvBridge()
 
 def callback_color(img):
 	"""  Gets color within specified image coordinates from ObjectColor. """
-
 	global bridge
-
 	image = img.imagen
 	x = img.x 
 	y = img.y
 	h = img.h
 	w = img.w
+
 	image = bridge.imgmsg_to_cv2(image, "bgr8")
 	image = image[y:y+h, x:x+w]	
-
 	hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 	hist = cv2.calcHist([hsv], [0], None, [6], [0, 180])
 	

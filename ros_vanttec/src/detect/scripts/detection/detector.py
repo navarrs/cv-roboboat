@@ -40,19 +40,19 @@ class Detector():
 		self.COLORS = np.random.uniform(0, 255, size=(len(self.classes), 3))
 		self.net = self.load_model()
 
-	def get_w(self):
+	def get_width(self):
 		""" Gets current frame width. """
 		return self.W
 
-	def set_w(self, w):
+	def set_width(self, w):
 		""" Sets frame width. """
 		self.W = w
 
-	def get_h(self):
+	def get_height(self):
 		""" Gets current frame height. """
 		return self.H
 
-	def set_h(self, h):
+	def set_height(self, h):
 		""" Sets frame height. """
 		self.H = h
 
@@ -70,11 +70,10 @@ class Detector():
 			x = 0
 		if y < 0: # Top y
 			y = 0
-		if (x + w) > self.get_w(): 
-			# x + w = self.get_w
-			w = self.get_w() - x
-		if (y + h) > self.get_h():
-			h = self.get_h() - y
+		if (x + w) > self.get_width(): 
+			w = self.get_width() - x
+		if (y + h) > self.get_height():
+			h = self.get_height() - y
 		
 		return x, y, w, h
 
@@ -123,7 +122,7 @@ class Detector():
 
 	def draw_prediction(self, img, class_id, obj_color, obj_id, x1, y1, x2, y2):
 		""" Draws bounding boxes to image. """
-		label = str( self.classes[class_id] )
+		label = str(self.classes[class_id])
 		tag = "{},{},{}".format(class_id, obj_color, obj_id)
 		color = self.COLORS[class_id] 
 		cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)

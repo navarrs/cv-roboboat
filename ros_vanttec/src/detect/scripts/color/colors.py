@@ -29,25 +29,25 @@ class Color():
     RED   = '\033[91m'
     DONE  = '\033[0m'
 
-def get_object_color(image, x, y, w, h):
+def get_color(image, x, y, w, h):
     """ Given a bounding box, obtains the color of the object within it. """
     global bridge
     
-    image = bridge.cv2_to_imgmsg(image, encoding = "bgr8")
+    image = bridge.cv2_to_imgmsg(image, encoding="bgr8")
 
     try:
+        """ Connect with service to detect color. """
         rospy.wait_for_service("/get_object_color", timeout=5.0)
         service = rospy.ServiceProxy("/get_object_color", ObjectColor)
         color = service(image,x,y,w,h)
-        #rospy.loginfo(color)
         return str(color.color)
-    
-    except (rospy.ServicesException, rospy.ROSException) as e:
+    except(rospy.ServicesException, rospy.ROSException) as e:
+        """ Service did not respond. """
         rospy.logerr("Service call failed: {}".format(e))
         exit()
 
 def change_brightness(image, brightness_coeff=1.5): 
-    """ Increases brightness of an image. """
+    """ Increases / decreases brightness of an image. """
     
     # Convert to HSL image
     image = cv2.cvtColor(image,cv2.COLOR_RGB2HLS) 
@@ -55,7 +55,7 @@ def change_brightness(image, brightness_coeff=1.5):
 
     # Scale pixel values up or down for channel 1(Lightness)
     image[:, :, 1] = image[:, :, 1] * brightness_coeff 
-    image[:,:,1][image[:,:,1] > 255]  = 255 
+    image[:, :, 1][image[:, :, 1] > 255]  = 255 
     image = np.array(image, dtype = np.uint8)
 
     # Conversion to RGB
