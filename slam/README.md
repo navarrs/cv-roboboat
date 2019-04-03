@@ -1,4 +1,4 @@
-# Cuco-Perception
+
 
 This repository contains:
 - A C++ ground annotator of point clouds based on: 
