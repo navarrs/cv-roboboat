@@ -1,0 +1,13 @@
+
+class Edge {
+	private:
+		float cost;
+		int source;
+		int destination;
+		
+		Edge() { // Default constructor
+			cost = 0;
+			source = 0;
+			destination = 0;
+		}
+}
