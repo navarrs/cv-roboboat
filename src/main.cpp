@@ -9,42 +9,22 @@
 #include <fstream>
 #include <string>
 
+#include "planning.h"
+
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 using namespace std;
 using namespace cv;
 
-#define THRESH 235
-#define WINDOW  20
-
-// Computes average of image patch 
-int average(Mat patch) {
-	int num_elements = patch.rows * patch.cols;
-	int sum = 0;
-	for (int i = 0; i < patch.rows; i++) {
-		for (int j = 0; j < patch.cols; j++) {
-				sum += (int)patch.at<uchar>(i, j);
-		}
-	}
-	return (sum == 0 ? 0 : sum / num_elements);
-}
-
-// Print graph
-void printg(vector<vector<int> > v) {
-	for (int i = 0; i < v.size(); i++) {
-		for (int j = 0; j < v[i].size(); j++) {
-			cout << v[i][j] << " ";
-		}
-		cout << endl;
-	}
-}
+#define DEBUG 0
 
 int main(int argc, char* argv[]) {
 	//Parse arguments
 	po::options_description description("Usage");
 	description.add_options()
 		("help", "Program usage.")
-		("in_path", po::value<string>()->default_value("../maps/map1.png"), "Path to input file.");
+		("inpath", po::value<string>()->default_value("../maps/map1.png"), "Path to input file.")
+		("dilation", po::value<int>()->default_value(10), "Size of dilation kernel. ");
 	po::variables_map opts;
 	po::store(po::command_line_parser(argc, argv).options(description).run(), opts);
 	try {
@@ -57,36 +37,50 @@ int main(int argc, char* argv[]) {
 		cout << description;
 		return 1;
 	}
-	string input_path = opts["in_path"].as<string>();
+	string input_path = opts["inpath"].as<string>();
+	int dilation = opts["dilation"].as<int>();
 
-	// Read input image
-	Mat map = imread(input_path, 0);
-	if (!map.data) {
-		cout << "No image data." << endl;
-		return -1;
+	// Set map 
+	cout << "[INFO] Generating world from input map..." << endl;
+	Planner::Map map;
+	map.set_input_map(input_path);
+	map.create_obstacle_map(dilation);
+	map.generate_world();
+	if (DEBUG) {
+		Mat input_map = map.get_input_map();
+		imshow("Input Map", input_map);
+		Mat obstacle_map = map.get_obstacle_map();
+		imshow("Obstacle Map", obstacle_map);
+		map.print_world();
+		waitKey(0);
 	}
-	resize(map, map, Size(640, 480));
-	Rect bounds(0, 0, map.cols, map.rows);
-	Mat map_crop = Mat(WINDOW, WINDOW, CV_8UC3, Scalar(0,0,0));
+	cout << "[DONE]" << endl;
 
-	// Generate graph 
-	// int graph[map.rows / WINDOW][map.cols / WINDOW];
-	vector<int> g(map.cols / WINDOW, 0);
-	vector<vector<int> > graph(map.rows / WINDOW, g);
+	// Set source and destination 
+	cout << "[INFO] Setting source and destination..." << endl;
+	Planner::PathGenerator astar;
+	astar.set_src({40, 44});
+	astar.set_dst({4,  20});
+	cout << "[DONE]" << endl;	
 
-	int c = 0;
-	for (int x = 0; x < map.cols; x += WINDOW) {
-		int r = 0;
-		for (int y = 0; y < map.rows; y += WINDOW) {
-			Rect roi(x, y, WINDOW, WINDOW);
-			map_crop = map(roi & bounds);
-			int avg = average(map_crop);
-			//graph[r++][c] = (avg < THRESH ? 1 : 0);
-			graph[r++][c] = (avg < THRESH ? 1 : 0);
-		}
-		c++;
+	// Path planning 
+	cout << "[INFO] Finding path using AStar algorithm..." << endl;
+	std::stack<Planner::coord> path;
+	astar.set_heuristic(Planner::Heuristic::euclidian);
+	astar.set_diagonal_movement(true); // set to false if using Heuristic::manhattan
+	astar.a_star_search(map.get_world(), path);
+
+	if (path.empty()) 
+		cout << "No path was found" << endl;
+	else {
+		map.trace_path(path);
+		map.print_world();
+		Mat final_map = map.get_input_map();
+		imshow("Final Map", final_map);
+		waitKey(0);
 	}
-	// Print graph
-	printg(graph);
+	cout << "[DONE] " << endl;
+
 	return 0;
 }
+
