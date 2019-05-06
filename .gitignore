@@ -3,6 +3,7 @@ datasets
 number_svm
 tesseract
 vanttec
+build
 
 ros_vanttec/build/*
 ros_vanttec/devel/*
